@@ -7,6 +7,23 @@
     <title>Movies!</title>
     <style>
         /* Part 3: Your styling goes here */
+        body {
+            background: rgb(218, 111, 111);
+            font-family: Helvetica;
+
+        }
+
+        h1 {
+            color: rgb(185, 80, 80);
+            background-color: lightgoldenrodyellow;
+        }
+
+        img {
+            border-radius: 20px;
+            border: 5px;
+            border-style: dashed;
+            border-color: lightgoldenrodyellow;
+        }
     </style>
     <script>
         function reverseString(s) {
@@ -19,8 +36,25 @@
                 const bodyElement = document.querySelector("body")
                 if (xhr.status == 200) {
                     /* Part 2: Build the HTML elements here and append them to the body */
-                    bodyElement.append(reverseString(xhr.responseText))
-                    // DOESNT WORK YET const myMovies = JSON.parse(xhr.responseText);
+                    // puts the json in the body and prints it -- commented out, not sure why this was put here. why reverse output?!
+                    // bodyElement.append(reverseString(xhr.responseText))
+                    const myMovies = JSON.parse(xhr.responseText);
+
+                    myMovies.forEach(movie => {
+                        /*                     const div = document.createElement("div");
+                                               console.log(movie); // for check in browser console; OUT COMMENT LATER!
+                                               div.textContent = movie.Title; // capital T!!!
+                                               bodyElement.appendChild(div);
+                       */
+                        const h1 = document.createElement("h1");
+                        h1.textContent = movie.Title;
+                        bodyElement.appendChild(h1);
+
+                        const img = document.createElement("img");
+                        img.src = movie.Poster;
+                        bodyElement.appendChild(img);
+
+                    });
                 } else {
                     bodyElement.append("Daten konnten nicht geladen werden, Status " + xhr.status + " - " + xhr.statusText)
                 }
@@ -33,6 +67,7 @@
 </head>
 
 <body>
+
 </body>
 
 </html>

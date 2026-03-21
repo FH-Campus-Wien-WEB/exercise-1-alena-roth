@@ -2,6 +2,15 @@ const express = require('express')
 const path = require('path')
 const app = express()
 
+// Serve static content in directory 'files'
+app.use(express.static(path.join(__dirname, 'files')));
+
+// Configure a 'get' endpoint for data
+app.get('/movies', function (req, res) {
+  // Part 1: Remove the next line and replace with your code
+  res.json(myMovies);
+})
+
 const myMovies = [
 
   {
@@ -18,41 +27,32 @@ const myMovies = [
     "imdbRating": 7.8
   },
   {
-    "Title": "Jurassic World",
-    "Released": "2015-06-12",
-    "Runtime": 124,
-    "Genres": ["Action, Adventure, Sci-Fi"],
-    "Directors": ["Colin Trevorrow"],
-    "Writers": ["Rick Jaffa, Amanda Silver, Colin Trevorrow"],
-    "Actors": ["Chris Pratt, Bryce Dallas Howard, Ty Simpkins"],
-    "Plot": "A new theme park, built on the original site of Jurassic Park, creates a genetically modified hybrid dinosaur, the Indominus Rex, which escapes containment and goes on a killing spree.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNzBhNzlkM2UtZTQyOC00NjUyLTkzMmMtNDQ1YTM5N2NmMGE5XkEyXkFqcGc@._V1_SX300.jpg",
-    "Metascore": 59,
-    "imdbRating": 6.9
+    "Title": "Whisper of the Heart",
+    "Released": "1996-12-13",
+    "Runtime": 111,
+    "Genres": ["Animation, Drama, Family"],
+    "Directors": ["Yoshifumi Kondô"],
+    "Writers": ["Aoi Hiiragi, Hayao Miyazaki"],
+    "Actors": ["Yoko Honna, Issei Takahashi, Takashi Tachibana"],
+    "Plot": "A love story between a girl who loves reading books and a boy who has previously checked out all of the library books she chooses.",
+    "Poster": "https://m.media-amazon.com/images/M/MV5BZWVlOGNlYjgtYWE4Yi00MjdiLWE1MTEtZTRmNzI1ODk5NzMzXkEyXkFqcGc@._V1_SX300.jpg",
+    "Metascore": 75,
+    "imdbRating": 7.8
   },
   {
-    "Title": "Cloud Atlas",
-    "Released": "26 Oct 2012",
-    "Runtime": 172,
-    "Genres": ["Drama, Mystery, Sci-Fi"],
-    "Directors": ["Tom Tykwer, Lana Wachowski, Lilly Wachowski"],
-    "Writers": ["David Mitchell, Lana Wachowski, Tom Tykwer"],
-    "Actors": ["Tom Hanks, Halle Berry, Hugh Grant"],
-    "Plot": "As souls are born and reborn, they renew their connections to one another throughout the ages.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMTczMTgxMjc4NF5BMl5BanBnXkFtZTcwNjM5MTA2OA@@._V1_SX300.jpg",
-    "Metascore": 55,
+    "Title": "The Boy and the Heron",
+    "Released": "2023-12-08",
+    "Runtime": 124,
+    "Genre": ["Animation, Adventure, Drama"],
+    "Directors": ["Hayao Miyazaki"],
+    "Writers": ["Hayao Miyazaki"],
+    "Actors": ["Soma Santoki, Masaki Suda, Kô Shibasaki"],
+    "Plot": "In the wake of his mother's death and his father's remarriage, a headstrong boy ventures into a dreamlike world shared by the living and the dead in search of his missing stepmother.",
+    "Poster": "https://m.media-amazon.com/images/M/MV5BMzA5Zjg3MTAtM2FhZS00NTNjLTg3NjEtNWQ4MTRhZjhiNzVmXkEyXkFqcGc@._V1_SX300.jpg",
+    "Metascore": 91,
     "imdbRating": 7.3
   }
 ]
-
-// Serve static content in directory 'files'
-app.use(express.static(path.join(__dirname, 'files')));
-
-// Configure a 'get' endpoint for data
-app.get('/movies', function (req, res) {
-  // Part 1: Remove the next line and replace with your code
-  res.json(myMovies);
-})
 
 app.listen(3000)
 
