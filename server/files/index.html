@@ -18,6 +18,19 @@
             background-color: lightgoldenrodyellow;
         }
 
+        h2 {
+            font-size: 20px;
+            font-family: 'Lucida Sans';
+            color: rgb(255, 255, 255);
+            background-color: null;
+        }
+
+        h3 {
+            font-size: 15;
+            color: rgb(124, 9, 9);
+            background-color: lightpink;
+        }
+
         img {
             border-radius: 20px;
             border: 5px;
@@ -50,9 +63,45 @@
                         h1.textContent = movie.Title;
                         bodyElement.appendChild(h1);
 
-                        const img = document.createElement("img");
-                        img.src = movie.Poster;
-                        bodyElement.appendChild(img);
+                        const poster = document.createElement("img");
+                        poster.src = movie.Poster;
+                        bodyElement.appendChild(poster);
+
+                        const released = document.createElement("h2");
+                        released.textContent = "Release date: " + movie.Released;
+                        bodyElement.appendChild(released);
+
+                        const runtime = document.createElement("h2");
+                        runtime.textContent = "Runtime: " + movie.Runtime + "min";
+                        bodyElement.appendChild(runtime);
+
+                        const genres = document.createElement("h2");
+                        genres.textContent = "Genres: " + movie.Genres;
+                        bodyElement.appendChild(genres);
+
+                        const directors = document.createElement("h2");
+                        directors.textContent = "Director: " + movie.Directors;
+                        bodyElement.appendChild(directors);
+
+                        const writers = document.createElement("h2");
+                        writers.textContent = "Writer(s): " + movie.Writers;
+                        bodyElement.appendChild(writers);
+
+                        const actors = document.createElement("h2");
+                        actors.textContent = "Voice actor(s): " + movie.Actors;
+                        bodyElement.appendChild(actors);
+
+                        const plot = document.createElement("h3");
+                        plot.textContent = movie.Plot;
+                        bodyElement.appendChild(plot);
+
+                        const ratingMetascore = document.createElement("h2");
+                        ratingMetascore.textContent = "Metascore: " + movie.Metascore;
+                        bodyElement.appendChild(ratingMetascore);
+
+                        const imdbRating = document.createElement("h2");
+                        imdbRating.textContent = "IMDb Rating: " + movie.imdbRating;
+                        bodyElement.appendChild(imdbRating);
 
                     });
                 } else {
