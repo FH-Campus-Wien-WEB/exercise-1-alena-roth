@@ -16,11 +16,12 @@
         h1 {
             color: rgb(185, 80, 80);
             background-color: lightgoldenrodyellow;
+            width: 800px;
         }
 
         h2 {
             font-size: 20px;
-            font-family: 'Lucida Sans';
+            font-style: italic;
             color: rgb(255, 255, 255);
             background-color: null;
         }
@@ -29,6 +30,7 @@
             font-size: 15;
             color: rgb(124, 9, 9);
             background-color: lightpink;
+            width: 700px;
         }
 
         img {
@@ -36,6 +38,11 @@
             border: 5px;
             border-style: dashed;
             border-color: lightgoldenrodyellow;
+        }
+
+        ul {
+            font-size: 20px;
+            color: whitesmoke;
         }
     </style>
     <script>
@@ -84,12 +91,32 @@
                         bodyElement.appendChild(directors);
 
                         const writers = document.createElement("h2");
-                        writers.textContent = "Writer(s): " + movie.Writers;
+                        writers.textContent = "Writer(s): " // + movie.Writers;
                         bodyElement.appendChild(writers);
 
+                        const LSwriters = document.createElement("ul"); // "unordered list"
+                        // String to array:
+                        movie.Writers.forEach(writer => {
+                            const li = document.createElement("li");
+                            li.textContent = writer;
+                            LSwriters.appendChild(li);
+                            console.log(movie.Writers);
+                        });
+                        bodyElement.appendChild(LSwriters);
+
                         const actors = document.createElement("h2");
-                        actors.textContent = "Voice actor(s): " + movie.Actors;
+                        actors.textContent = "Voice actor(s): " //+ movie.Actors;
                         bodyElement.appendChild(actors);
+
+                        const LSactors = document.createElement("ul"); // "unordered list"
+                        // String to array:
+                        movie.Actors.forEach(actor => {
+                            const li = document.createElement("li");
+                            li.textContent = actor;
+                            LSactors.appendChild(li);
+                            console.log(movie.Actors);
+                        });
+                        bodyElement.appendChild(LSactors);
 
                         const plot = document.createElement("h3");
                         plot.textContent = movie.Plot;
