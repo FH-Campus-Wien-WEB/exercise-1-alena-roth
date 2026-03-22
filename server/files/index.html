@@ -20,17 +20,18 @@
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
             font-style: italic;
-            color: rgb(255, 255, 255);
+            color: whitesmoke;
             background-color: null;
         }
 
         h3 {
-            font-size: 15;
+            font-size: 18px;
             color: rgb(124, 9, 9);
             background-color: lightpink;
-            width: 700px;
+            width: 600px;
         }
 
         img {
@@ -41,8 +42,8 @@
         }
 
         ul {
-            font-size: 20px;
-            color: whitesmoke;
+            font-size: 18px;
+            color: rgb(236, 222, 222);
         }
     </style>
     <script>
@@ -74,6 +75,7 @@
                         poster.src = movie.Poster;
                         bodyElement.appendChild(poster);
 
+                        //how to add more empty space and put release+runtime on same height?
                         const released = document.createElement("h2");
                         released.textContent = "Release date: " + movie.Released;
                         bodyElement.appendChild(released);
@@ -83,12 +85,31 @@
                         bodyElement.appendChild(runtime);
 
                         const genres = document.createElement("h2");
-                        genres.textContent = "Genres: " + movie.Genres;
+                        genres.textContent = "Genres: " //+ movie.Genres;
                         bodyElement.appendChild(genres);
 
+                        const LSgenres = document.createElement("ul"); // "unordered list"
+                        // String to array:
+                        movie.Genres.forEach(genre => {
+                            const li = document.createElement("li");
+                            li.textContent = genre;
+                            LSgenres.appendChild(li);
+                            console.log(movie.Genres);
+                        });
+                        bodyElement.appendChild(LSgenres);
+
                         const directors = document.createElement("h2");
-                        directors.textContent = "Director: " + movie.Directors;
+                        directors.textContent = "Director: " //+ movie.Directors;
                         bodyElement.appendChild(directors);
+
+                        const LSdirectors = document.createElement("ul");
+                        // String to array:
+                        movie.Directors.forEach(director => {
+                            const li = document.createElement("li");
+                            li.textContent = director;
+                            LSdirectors.appendChild(li);
+                        });
+                        bodyElement.appendChild(LSdirectors);
 
                         const writers = document.createElement("h2");
                         writers.textContent = "Writer(s): " // + movie.Writers;
@@ -129,6 +150,10 @@
                         const imdbRating = document.createElement("h2");
                         imdbRating.textContent = "IMDb Rating: " + movie.imdbRating;
                         bodyElement.appendChild(imdbRating);
+
+                        //horizontal separation line -- too much with title-bg
+                        //const hr = document.createElement("hr");
+                        //bodyElement.appendChild(hr);
 
                     });
                 } else {
