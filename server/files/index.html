@@ -6,46 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies!</title>
     <style>
-        /* Part 3: Your styling goes here */
         body {
-            background: rgb(218, 111, 111);
-            font-family: Helvetica;
+            background: rgb(230, 190, 190);
+            font-family: Arial;
+            letter-spacing: 0.3px;
 
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        article {
+            background-color: rgb(104, 53, 63);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 3px 3px 3px 3px rgb(110, 96, 103);
+            margin: 30px;
+            width: auto;
+            max-width: 500px;
+        }
+
+        article:hover {
+            background: rgb(99, 34, 47);
+            box-shadow: 5px 5px 5px 5px rgb(71, 59, 65);
         }
 
         h1 {
-            color: rgb(185, 80, 80);
+            text-align: center;
+            color: rgb(85, 28, 37);
             background-color: lightgoldenrodyellow;
-            width: 800px;
-        }
-
-        h2 {
-            font-size: 18px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-style: italic;
-            color: whitesmoke;
-            background-color: null;
-        }
-
-        h3 {
-            font-size: 18px;
-            color: rgb(124, 9, 9);
-            background-color: lightpink;
-            width: 600px;
+            max-width: 100%;
+            border-radius: 40px;
         }
 
         img {
             border-radius: 20px;
-            border: 5px;
+            border: 3px;
             border-style: dashed;
             border-color: lightgoldenrodyellow;
+            display: block;
+            margin: auto;
+            margin-bottom: 15px;
+            padding: 2px;
+        }
+
+        .meta {
+            text-align: center;
+            font-size: 14px;
+            color: rgb(216, 201, 206)
+        }
+
+        .genre-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 0px;
+            margin-bottom: 40px;
+        }
+
+        .genre-list li {
+            background-color: rgb(177, 143, 156);
+            border-radius: 10px;
+            border-style: solid;
+            border-color: rgb(216, 201, 206);
+            padding: 10px;
+            color: rgb(65, 13, 29);
+        }
+
+        .card {
+            background-color: rgb(238, 233, 213);
+            color: rgb(65, 13, 29);
+            border-radius: 10px;
+            border-style: solid;
+            border-color: rgb(216, 201, 206);
+            padding: 15px;
+            font-size: 18px;
+            margin: 20px 10px 40px 10px;
+
+        }
+
+        h2 {
+            font-size: 18px;
+            color: whitesmoke;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 500;
+            color: rgb(88, 9, 9);
+            background-color: rgb(234, 235, 213);
+            width: auto;
         }
 
         ul {
-            font-size: 18px;
+            font-size: 17px;
             color: rgb(236, 222, 222);
+            margin-left: 30px;
         }
     </style>
+
     <script>
         function reverseString(s) {
             return s.split("").reverse().join("");
@@ -56,39 +120,44 @@
             xhr.onload = function () {
                 const bodyElement = document.querySelector("body")
                 if (xhr.status == 200) {
-                    /* Part 2: Build the HTML elements here and append them to the body */
-                    // puts the json in the body and prints it -- commented out, not sure why this was put here. why reverse output?!
-                    // bodyElement.append(reverseString(xhr.responseText))
+
                     const myMovies = JSON.parse(xhr.responseText);
 
                     myMovies.forEach(movie => {
-                        /*                     const div = document.createElement("div");
-                                               console.log(movie); // for check in browser console; OUT COMMENT LATER!
-                                               div.textContent = movie.Title; // capital T!!!
-                                               bodyElement.appendChild(div);
-                       */
+
+                        const article = document.createElement("article");
+
                         const h1 = document.createElement("h1");
                         h1.textContent = movie.Title;
-                        bodyElement.appendChild(h1);
+                        article.appendChild(h1);
 
                         const poster = document.createElement("img");
                         poster.src = movie.Poster;
-                        bodyElement.appendChild(poster);
+                        article.appendChild(poster);
 
-                        //how to add more empty space and put release+runtime on same height?
                         const released = document.createElement("h2");
-                        released.textContent = "Release date: " + movie.Released;
-                        bodyElement.appendChild(released);
 
-                        const runtime = document.createElement("h2");
-                        runtime.textContent = "Runtime: " + movie.Runtime + "min";
-                        bodyElement.appendChild(runtime);
+                        const meta = document.createElement("p");
+                        meta.classList.add("meta");
+                        meta.textContent = movie.Runtime + "min • " + movie.Released;
+                        article.appendChild(meta);
 
-                        const genres = document.createElement("h2");
-                        genres.textContent = "Genres: " //+ movie.Genres;
-                        bodyElement.appendChild(genres);
+                        const ratingMetascore = document.createElement("h2");
+
+                        const imdbRating = document.createElement("h2");
+
+                        const ratings = document.createElement("p");
+                        ratings.classList.add("meta");
+                        ratings.textContent = movie.imdbRating + " IMDb • " + movie.Metascore + " Metascore";
+                        article.appendChild(ratings);
+
+                        const plot = document.createElement("div");
+                        plot.classList.add("card");
+                        plot.textContent = movie.Plot;
+                        article.appendChild(plot);
 
                         const LSgenres = document.createElement("ul"); // "unordered list"
+                        LSgenres.classList.add("genre-list");
                         // String to array:
                         movie.Genres.forEach(genre => {
                             const li = document.createElement("li");
@@ -96,11 +165,11 @@
                             LSgenres.appendChild(li);
                             console.log(movie.Genres);
                         });
-                        bodyElement.appendChild(LSgenres);
+                        article.appendChild(LSgenres);
 
                         const directors = document.createElement("h2");
                         directors.textContent = "Director: " //+ movie.Directors;
-                        bodyElement.appendChild(directors);
+                        article.appendChild(directors);
 
                         const LSdirectors = document.createElement("ul");
                         // String to array:
@@ -109,11 +178,11 @@
                             li.textContent = director;
                             LSdirectors.appendChild(li);
                         });
-                        bodyElement.appendChild(LSdirectors);
+                        article.appendChild(LSdirectors);
 
                         const writers = document.createElement("h2");
                         writers.textContent = "Writer(s): " // + movie.Writers;
-                        bodyElement.appendChild(writers);
+                        article.appendChild(writers);
 
                         const LSwriters = document.createElement("ul"); // "unordered list"
                         // String to array:
@@ -123,11 +192,11 @@
                             LSwriters.appendChild(li);
                             console.log(movie.Writers);
                         });
-                        bodyElement.appendChild(LSwriters);
+                        article.appendChild(LSwriters);
 
                         const actors = document.createElement("h2");
                         actors.textContent = "Voice actor(s): " //+ movie.Actors;
-                        bodyElement.appendChild(actors);
+                        article.appendChild(actors);
 
                         const LSactors = document.createElement("ul"); // "unordered list"
                         // String to array:
@@ -137,23 +206,9 @@
                             LSactors.appendChild(li);
                             console.log(movie.Actors);
                         });
-                        bodyElement.appendChild(LSactors);
+                        article.appendChild(LSactors);
 
-                        const plot = document.createElement("h3");
-                        plot.textContent = movie.Plot;
-                        bodyElement.appendChild(plot);
-
-                        const ratingMetascore = document.createElement("h2");
-                        ratingMetascore.textContent = "Metascore: " + movie.Metascore;
-                        bodyElement.appendChild(ratingMetascore);
-
-                        const imdbRating = document.createElement("h2");
-                        imdbRating.textContent = "IMDb Rating: " + movie.imdbRating;
-                        bodyElement.appendChild(imdbRating);
-
-                        //horizontal separation line -- too much with title-bg
-                        //const hr = document.createElement("hr");
-                        //bodyElement.appendChild(hr);
+                        bodyElement.appendChild(article);
 
                     });
                 } else {
